@@ -42,8 +42,10 @@ class User(name: String, private var _email: String) extends Person(name, 18):
   val first  = Person("The First", 1)
   val second = first.having(_.name = "The Second")
   val third  = second.having(_.age = 50)
-  val error  = second.having(_ => first.name = "FirstMutated")
+  val error  = second.having(_ => second.name = "FirstMutated")
   //  ^^^^^ Object (first : rebuildable.Person) is past it's rebuilding phase.
+  // Thanks to the opaque type `BeingBuilt`, you cannot mutate the self.type (second)
+  // Even if it was the caller
 
   // Mutation doesn't work outside of the scope of `having`
   // So Rebuildable objects are immutable for all intents and purposes
