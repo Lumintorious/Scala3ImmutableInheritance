@@ -1,1 +1,0 @@
-# Scala3ImmutableInheritance
