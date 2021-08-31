@@ -57,7 +57,7 @@ class User(name: String, private var _email: String) extends Person(name, 18):
 
   println(first) // Person("The First", 1)
   println(second) // Person("The Second", 1)
-  println(third) // Person("The Second", 36)
+  println(third) // Person("The Second", 50)
   println(fresh) // Person("Anon", 18)
 
   val user = User("Joe", "joe@gmail.com")
