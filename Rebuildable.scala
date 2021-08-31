@@ -43,7 +43,13 @@ class User(name: String, private var _email: String) extends Person(name, 18):
   val second = first.having(_.name = "The Second")
   val third  = second.having(_.age = 50)
   val error  = second.having(_ => first.name = "FirstMutated")
-  //  ^^^^^ Object (first : sgl.util.Person) is past it's rebuilding phase.
+  //  ^^^^^ Object (first : rebuildable.Person) is past it's rebuilding phase.
+
+  // Mutation doesn't work outside of the scope of `having`
+  // So Rebuildable objects are immutable for all intents and purposes
+  // after initialization
+  second.age = 44
+  // Object (second : rebuildable.Person) is past it's rebuilding phase.
 
   val fresh  = Person("Fresh", 18).having { _.name = "Anon" }
 
